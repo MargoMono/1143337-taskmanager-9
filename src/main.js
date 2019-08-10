@@ -4,12 +4,6 @@ const render = (element, template, place) => {
   element.insertAdjacentHTML(place, template);
 };
 
-const massRenderElements = () => {
-  return `${searchTemplate()}
-          ${filtersTemplate()}
-          ${boardTemplate()}
-          `;
-};
 const menuTemplate = () => {
   return `<section class="control__btn-wrap">
           <input
@@ -40,6 +34,7 @@ const menuTemplate = () => {
           >
         </section>`;
 };
+
 const searchTemplate = () => {
   return `<section class="main__search search container">
         <input
@@ -122,20 +117,81 @@ const filtersTemplate = () => {
         >
       </section>`;
 };
-const boardTemplate = () => {
-  return `<section class="board container">
-        <div class="board__filter-list">
-          <a href="#" class="board__filter">SORT BY DEFAULT</a>
-          <a href="#" class="board__filter">SORT BY DATE up</a>
-          <a href="#" class="board__filter">SORT BY DATE down</a>
-        </div>
 
-        <div class="board__tasks">
-            ${boardTaskEditTemplate()}
-            ${boardTasksList()}
-        </div>
-            ${boardButtonTemplate()}
-      </section>`;
+const boardTaskTemplate = () => {
+  return `<article class="card card--black">
+              <div class="card__form">
+                <div class="card__inner">
+                  <div class="card__control">
+                    <button type="button" class="card__btn card__btn--edit">
+                      edit
+                    </button>
+                    <button type="button" class="card__btn card__btn--archive">
+                      archive
+                    </button>
+                    <button
+                      type="button"
+                      class="card__btn card__btn--favorites card__btn--disabled"
+                    >
+                      favorites
+                    </button>
+                  </div>
+  
+                  <div class="card__color-bar">
+                    <svg class="card__color-bar-wave" width="100%" height="10">
+                      <use xlink:href="#wave"></use>
+                    </svg>
+                  </div>
+  
+                  <div class="card__textarea-wrap">
+                    <p class="card__text">Example default task with default color.</p>
+                  </div>
+  
+                  <div class="card__settings">
+                    <div class="card__details">
+                      <div class="card__dates">
+                        <div class="card__date-deadline">
+                          <p class="card__input-deadline-wrap">
+                            <span class="card__date">23 September</span>
+                            <span class="card__time">11:15 PM</span>
+                          </p>
+                        </div>
+                      </div>
+  
+                      <div class="card__hashtag">
+                        <div class="card__hashtag-list">
+                          <span class="card__hashtag-inner">
+                            <span class="card__hashtag-name">
+                              #todo
+                            </span>
+                          </span>
+  
+                          <span class="card__hashtag-inner">
+                            <span class="card__hashtag-name">
+                              #personal
+                            </span>
+                          </span>
+  
+                          <span class="card__hashtag-inner">
+                            <span class="card__hashtag-name">
+                              #important
+                            </span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>`;
+};
+const boardTasksList = () => {
+  let taskCount = 3;
+  let boardTasks = '';
+  for (let i = 0; i < taskCount; i++) {
+    boardTasks += boardTaskTemplate();
+  }
+  return boardTasks;
 };
 const boardTaskEditTemplate = () => {
   return `<article class="card card--edit card--yellow card--repeat">
@@ -409,84 +465,30 @@ const boardTaskEditTemplate = () => {
 const boardButtonTemplate = () => {
   return `<button class="load-more" type="button">load more</button>`;
 };
-const boardTaskTemplate = () => {
-  return `<article class="card card--black">
-              <div class="card__form">
-                <div class="card__inner">
-                  <div class="card__control">
-                    <button type="button" class="card__btn card__btn--edit">
-                      edit
-                    </button>
-                    <button type="button" class="card__btn card__btn--archive">
-                      archive
-                    </button>
-                    <button
-                      type="button"
-                      class="card__btn card__btn--favorites card__btn--disabled"
-                    >
-                      favorites
-                    </button>
-                  </div>
-  
-                  <div class="card__color-bar">
-                    <svg class="card__color-bar-wave" width="100%" height="10">
-                      <use xlink:href="#wave"></use>
-                    </svg>
-                  </div>
-  
-                  <div class="card__textarea-wrap">
-                    <p class="card__text">Example default task with default color.</p>
-                  </div>
-  
-                  <div class="card__settings">
-                    <div class="card__details">
-                      <div class="card__dates">
-                        <div class="card__date-deadline">
-                          <p class="card__input-deadline-wrap">
-                            <span class="card__date">23 September</span>
-                            <span class="card__time">11:15 PM</span>
-                          </p>
-                        </div>
-                      </div>
-  
-                      <div class="card__hashtag">
-                        <div class="card__hashtag-list">
-                          <span class="card__hashtag-inner">
-                            <span class="card__hashtag-name">
-                              #todo
-                            </span>
-                          </span>
-  
-                          <span class="card__hashtag-inner">
-                            <span class="card__hashtag-name">
-                              #personal
-                            </span>
-                          </span>
-  
-                          <span class="card__hashtag-inner">
-                            <span class="card__hashtag-name">
-                              #important
-                            </span>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </article>`;
+const boardTemplate = () => {
+  return `<section class="board container">
+        <div class="board__filter-list">
+          <a href="#" class="board__filter">SORT BY DEFAULT</a>
+          <a href="#" class="board__filter">SORT BY DATE up</a>
+          <a href="#" class="board__filter">SORT BY DATE down</a>
+        </div>
+
+        <div class="board__tasks">
+            ${boardTaskEditTemplate()}
+            ${boardTasksList()}
+        </div>
+            ${boardButtonTemplate()}
+      </section>`;
+};
+
+const massRenderElements = () => {
+  return `${searchTemplate()}
+          ${filtersTemplate()}
+          ${boardTemplate()}`;
 };
 
 const mainElement = document.querySelector('.main');
 const headerElement = mainElement.querySelector('.main__control');
-const boardTasksList = () => {
-  let taskCount = 3;
-  let boardTasks = '';
-  for (let i = 0; i < taskCount; i++) {
-    boardTasks += boardTaskTemplate();
-  }
-  return boardTasks;
-};
 
 render(headerElement, menuTemplate(), 'beforeend');
 render(mainElement, massRenderElements(), 'beforeend');
