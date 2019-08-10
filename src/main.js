@@ -4,7 +4,8 @@ const render = (element, template, place) => {
   element.insertAdjacentHTML(place, template);
 };
 
-const menuTemplate = `<section class="control__btn-wrap">
+const menuTemplate = () => {
+  return `<section class="control__btn-wrap">
           <input
             type="radio"
             name="control"
@@ -32,7 +33,9 @@ const menuTemplate = `<section class="control__btn-wrap">
             >STATISTICS</label
           >
         </section>`;
-const searchTemplate = `<section class="main__search search container">
+};
+const searchTemplate = () => {
+  return `<section class="main__search search container">
         <input
           type="text"
           id="search__input"
@@ -41,7 +44,9 @@ const searchTemplate = `<section class="main__search search container">
         />
         <label class="visually-hidden" for="search__input">Search</label>
       </section>`;
-const filtersTemplate = `<section class="main__filter filter container">
+};
+const filtersTemplate = () => {
+  return `<section class="main__filter filter container">
         <input
           type="radio"
           id="filter__all"
@@ -109,7 +114,9 @@ const filtersTemplate = `<section class="main__filter filter container">
           >Archive <span class="filter__archive-count">115</span></label
         >
       </section>`;
-const boardTemplate = `<section class="board container">
+};
+const boardTemplate = () => {
+  return `<section class="board container">
         <div class="board__filter-list">
           <a href="#" class="board__filter">SORT BY DEFAULT</a>
           <a href="#" class="board__filter">SORT BY DATE up</a>
@@ -117,10 +124,13 @@ const boardTemplate = `<section class="board container">
         </div>
 
         <div class="board__tasks">
+            ${boardTaskEditTemplate()}
         </div>
-
+            ${boardButtonTemplate()}
       </section>`;
-const boardTaskTemplate = `<article class="card card--black">
+};
+const boardTaskTemplate = () => {
+  return `<article class="card card--black">
             <div class="card__form">
               <div class="card__inner">
                 <div class="card__control">
@@ -185,7 +195,9 @@ const boardTaskTemplate = `<article class="card card--black">
               </div>
             </div>
           </article>`;
-const boardTaskEditTemplate = `<article class="card card--edit card--yellow card--repeat">
+};
+const boardTaskEditTemplate = () => {
+  return `<article class="card card--edit card--yellow card--repeat">
             <form class="card__form" method="get">
               <div class="card__inner">
                 <div class="card__control">
@@ -452,24 +464,25 @@ const boardTaskEditTemplate = `<article class="card card--edit card--yellow card
               </div>
             </form>
           </article>`;
-const boardButtonTemplate = `<button class="load-more" type="button">load more</button>`;
+};
+const boardButtonTemplate = () => {
+  return `<button class="load-more" type="button">load more</button>`;
+};
 
-const taskCount = 3;
+const TASK_COUNT = 3;
 const mainElement = document.querySelector('.main');
 const headerElement = mainElement.querySelector('.main__control');
 
-render(headerElement, menuTemplate, 'beforeend');
-render(mainElement, searchTemplate, 'beforeend');
-render(mainElement, filtersTemplate, 'beforeend');
-render(mainElement, boardTemplate, 'beforeend');
+render(headerElement, menuTemplate(), 'beforeend');
+render(mainElement, searchTemplate(), 'beforeend');
+render(mainElement, filtersTemplate(), 'beforeend');
+render(mainElement, boardTemplate(), 'beforeend');
 
-const boardElement = mainElement.querySelector('.board');
 const boardTasksListElement = mainElement.querySelector('.board__tasks');
 
-render(boardTasksListElement, boardTaskEditTemplate, 'beforeend');
-new Array(taskCount).fill().
-    forEach(() => render(boardTasksListElement, boardTaskTemplate, 'beforeend'));
-render(boardElement, boardButtonTemplate, 'beforeend');
+for (let i = 0; i < TASK_COUNT; i++) {
+  render(boardTasksListElement, boardTaskTemplate(), 'beforeend');
+};
 
 
 
