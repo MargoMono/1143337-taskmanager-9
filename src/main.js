@@ -1,5 +1,3 @@
-'use strict';
-
 const render = (element, template, place) => {
   element.insertAdjacentHTML(place, template);
 };

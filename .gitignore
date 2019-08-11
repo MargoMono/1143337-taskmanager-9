@@ -11,5 +11,9 @@ Thumbs.db
 *.log*
 node_modules/
 
+
 # Папка с собранными файлами проекта
 build/
+bundle.js
+bundle.js.map
+
