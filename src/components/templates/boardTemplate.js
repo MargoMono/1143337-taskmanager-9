@@ -1,6 +1,6 @@
-import boardTaskEditTemplate from './boardTaskEditTemplate.js'
-import boardTasksList from './boardTasksList.js'
-import boardButtonTemplate from './boardButtonTemplate.js'
+import boardTaskEditTemplate from './boardTaskEditTemplate.js';
+import boardTasksList from './boardTasksList.js';
+import boardButtonTemplate from './boardButtonTemplate.js';
 
 const boardTemplate = () => {
   return `<section class="board container">

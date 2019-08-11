@@ -8,13 +8,13 @@ const massRenderElements = () => {
           ${filtersTemplate}
           ${boardTemplate}`;
 };
-const mainElement = document.querySelector('.main');
-const headerElement = mainElement.querySelector('.main__control');
+const mainElement = document.querySelector(`.main`);
+const headerElement = mainElement.querySelector(`.main__control`);
 
 const render = (element, template, place) => {
   element.insertAdjacentHTML(place, template);
 };
 
-render(headerElement, menuTemplate, 'beforeend');
-render(mainElement, massRenderElements(), 'beforeend');
+render(headerElement, menuTemplate, `beforeend`);
+render(mainElement, massRenderElements(), `beforeend`);
 
