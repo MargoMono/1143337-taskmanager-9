@@ -268,4 +268,4 @@ const boardTaskEditTemplate = () => {
           </article>`;
 };
 
-export default boardTaskEditTemplate();
+export {boardTaskEditTemplate};

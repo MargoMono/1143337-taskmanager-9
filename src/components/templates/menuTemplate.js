@@ -29,4 +29,4 @@ const menuTemplate = () => {
         </section>`;
 };
 
-export default menuTemplate();
+export {menuTemplate};

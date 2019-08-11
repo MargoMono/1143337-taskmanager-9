@@ -10,4 +10,4 @@ const searchTemplate = () => {
       </section>`;
 };
 
-export default searchTemplate();
+export {searchTemplate};

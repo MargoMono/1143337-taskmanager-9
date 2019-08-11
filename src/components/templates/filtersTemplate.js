@@ -69,4 +69,4 @@ const filtersTemplate = () => {
       </section>`;
 };
 
-export default filtersTemplate();
+export {filtersTemplate};
