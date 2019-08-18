@@ -1,12 +1,8 @@
+import {taskData} from './data.js';
 import {boardTaskTemplate} from './boardTaskTemplate.js';
 
 const boardTasksList = () => {
-  let taskCount = 3;
-  let boardTasks = ``;
-  for (let i = 0; i < taskCount; i++) {
-    boardTasks += boardTaskTemplate();
-  }
-  return boardTasks;
-};
+  return Array.from(new Array(12)).map(() => boardTaskTemplate(taskData())).join(``);
+}
 
 export {boardTasksList};

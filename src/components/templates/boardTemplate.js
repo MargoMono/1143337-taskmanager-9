@@ -1,4 +1,3 @@
-import {boardTaskEditTemplate} from './boardTaskEditTemplate.js';
 import {boardTasksList} from './boardTasksList.js';
 import {boardButtonTemplate} from './boardButtonTemplate.js';
 
@@ -11,7 +10,6 @@ const boardTemplate = () => {
         </div>
 
         <div class="board__tasks">
-            ${boardTaskEditTemplate()}
             ${boardTasksList()}
         </div>
             ${boardButtonTemplate()}
