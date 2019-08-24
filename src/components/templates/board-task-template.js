@@ -1,5 +1,5 @@
-const boardTaskTemplate = ({description, dueDate, tags, repeatingDays, color, isFavorite, isArchive}) => {
-  return `<article class="card card--${color} ${Object.keys(repeatingDays).some(day => repeatingDays[day]) ? `card--repeat` : ``}">
+const boardTaskTemplate = ({description, dueDate, tags, repeatingDays, currentColor}) => {
+  return `<article class="card card--${currentColor} ${Object.keys(repeatingDays).some((day) => repeatingDays[day]) ? `card--repeat` : ``}">
               <div class="card__form">
                 <div class="card__inner">
                   <div class="card__control">
