@@ -9,6 +9,7 @@ const getRandomBool = () => {
 const getRandomPlusOrMinus = () => {
   return (Math.random() < 0.5) ? -1 : 1;
 };
+
 const getMixArrayValue = (array) => {
   return array.sort(() => {
     return Math.random() - 0.5;
@@ -20,7 +21,7 @@ const getRandomArrayValues = (array, maxValuesCount) => {
 };
 
 const getRandomSeveralDaysFromDate = (date, max) => {
-  return date + (1 + getRandomIntWithMax(max) * 24 * 60 * 60 * 1000) *
+  return date + (getRandomIntWithMax(max) * 24 * 60 * 60 * 1000) *
       getRandomPlusOrMinus();
 };
 
@@ -29,5 +30,5 @@ export {
   getRandomBool,
   getMixArrayValue,
   getRandomArrayValues,
-  getRandomSeveralDaysFromDate
+  getRandomSeveralDaysFromDate,
 };

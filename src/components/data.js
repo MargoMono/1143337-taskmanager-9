@@ -25,8 +25,7 @@ const taskData = () => ({
     `Сделать домашку`,
     `Пройти интенсив на соточку`][getRandomIntWithMax(2)],
   dueDate: getRandomSeveralDaysFromDate(Date.now(), 7),
-  tags: getRandomArrayValues(Array.from(
-      new Set([`homework`, `theory`, `practice`, `intensive`, `keks`])), 3),
+  tags: getRandomArrayValues(Array.from(new Set([`homework`, `theory`, `practice`, `intensive`, `keks`])), 3),
   repeatingDays: getRepeatingDays(),
   colors: getColors(),
   currentColor: getColors()[getRandomIntWithMax(4)],
@@ -34,15 +33,46 @@ const taskData = () => ({
   isArchive: getRandomBool(),
 });
 
-const filtersData = tasksList => {
+const filtersData = (tasksList) => {
+
+  const allTasksListCount = tasksList.length;
+
+  let todayTasksListCount = 0;
+  let overdueTasksListCount = 0;
+  let favoritesTasksListCount = 0;
+  let repeatingTasksListCount = 0;
+  let tagsTasksListCount = 0;
+  let archiveTasksListCount = 0;
+
+  tasksList.forEach((task) => {
+    if (task.dueDate < Date.now()) {
+      overdueTasksListCount++;
+    }
+    if (task.dueDate === Date.now()) {
+      todayTasksListCount++;
+    }
+    if (Object.keys(task.repeatingDays).some((day) => day)) {
+      repeatingTasksListCount++;
+    }
+    if (task.tags.length !== 0) {
+      tagsTasksListCount++;
+    }
+    if (task.isArchive) {
+      archiveTasksListCount++;
+    }
+    if (task.isFavorite) {
+      favoritesTasksListCount++;
+    }
+  });
+
   return [
-    {title: `all`, count: 12},
-    {title: `overdue`, count: 12},
-    {title: `today`, count: 12},
-    {title: `favorites`, count: 12},
-    {title: `repeating`, count: 12},
-    {title: `tags`, count: 12},
-    {title: `archive`, count: 12},
+    {title: `all`, count: allTasksListCount},
+    {title: `overdue`, count: overdueTasksListCount},
+    {title: `today`, count: todayTasksListCount},
+    {title: `favorites`, count: favoritesTasksListCount},
+    {title: `repeating`, count: repeatingTasksListCount},
+    {title: `tags`, count: tagsTasksListCount},
+    {title: `archive`, count: archiveTasksListCount},
   ];
 };
 
