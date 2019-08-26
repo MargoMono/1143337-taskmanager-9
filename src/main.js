@@ -13,7 +13,7 @@ const headerElement = mainElement.querySelector(`.main__control`);
 const massRenderElements = () => {
   return `${searchTemplate()}
           ${filtersTemplate(filtersList)}
-          ${boardTemplate(initTasksList.splice(0, TASK_LOAD), false)}`;
+          ${boardTemplate(initTasksList.splice(0, TASK_LOAD))}`;
 };
 
 const render = (element, template, place) => {
@@ -28,7 +28,7 @@ const onLoadMoreClickHandler = (actualTasksList) => {
   let loadMoreButton = mainElement.querySelector(`.load-more`);
 
   const addTasks = () => {
-    return `${boardTasksList([...actualTasksList], true)}`;
+    return `${boardTasksList(actualTasksList)}`;
   };
 
   loadMoreButton.remove();
