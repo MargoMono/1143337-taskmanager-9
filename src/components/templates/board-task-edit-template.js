@@ -61,9 +61,7 @@ const boardTaskEditTemplate = ({description, dueDate, tags, repeatingDays, curre
                         
                       <fieldset class="card__repeat-days">
                         <div class="card__repeat-days-inner">
-                          ${Array.from(Object.keys(repeatingDays)).
-      map((day) => `
-                          <input
+                          ${Object.keys(repeatingDays).map((day) => `<input
                             class="visually-hidden card__repeat-day-input"
                             type="checkbox"
                             id="repeat-mo-4"
@@ -110,7 +108,7 @@ const boardTaskEditTemplate = ({description, dueDate, tags, repeatingDays, curre
                   <div class="card__colors-inner">
                     <h3 class="card__colors-title">Color</h3>
                     <div class="card__colors-wrap">
-                     ${Array.from(colors).map((color) => `<input
+                     ${colors.map((color) => `<input
                         type="radio"
                         id="color-${color}-4"
                         class="card__color-input card__color-input--${color} visually-hidden"

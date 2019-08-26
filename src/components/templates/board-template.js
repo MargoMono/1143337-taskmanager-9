@@ -8,7 +8,7 @@ const boardTasksList = (taskListData) => {
       join(``);
 };
 
-const boardTemplate = (tasksList, isLoaded) => {
+const boardTemplate = (tasksList) => {
   return `<section class="board container">
         <div class="board__filter-list">
           <a href="#" class="board__filter">SORT BY DEFAULT</a>
@@ -17,11 +17,11 @@ const boardTemplate = (tasksList, isLoaded) => {
         </div>
 
         <div class="board__tasks">
-            ${boardTaskEditTemplate(tasksList[0])}
+            ${boardTaskEditTemplate(tasksList.splice(0, 1)[0])}
             ${boardTasksList(tasksList)}
         </div>
-            ${isLoaded ? `` : boardButtonTemplate()}
+            ${boardButtonTemplate()}
       </section>`;
 };
 
-export {boardTemplate};
+export {boardTemplate, boardTasksList};

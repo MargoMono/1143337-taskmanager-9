@@ -1,9 +1,9 @@
 import {menuTemplate} from './components/templates/menu-template.js';
 import {searchTemplate} from './components/templates/search-template.js';
 import {filtersTemplate} from './components/templates/filters-template.js';
-import {boardTemplate} from './components/templates/board-template.js';
+import {boardTemplate, boardTasksList} from './components/templates/board-template.js';
 import {taskData, filtersData} from './components/data.js';
-import {TASK_COUNT} from './components/constans.js';
+import {TASK_COUNT, TASK_LOAD} from './components/constans.js';
 
 const initTasksList = Array.from(new Array(TASK_COUNT)).map(() => taskData());
 const filtersList = filtersData(initTasksList);
@@ -13,7 +13,7 @@ const headerElement = mainElement.querySelector(`.main__control`);
 const massRenderElements = () => {
   return `${searchTemplate()}
           ${filtersTemplate(filtersList)}
-          ${boardTemplate(initTasksList, false)}`;
+          ${boardTemplate(initTasksList.splice(0, TASK_LOAD), false)}`;
 };
 
 const render = (element, template, place) => {
@@ -24,19 +24,15 @@ render(headerElement, menuTemplate(), `beforeend`);
 render(mainElement, massRenderElements(), `beforeend`);
 
 const onLoadMoreClickHandler = (actualTasksList) => {
-  const additionalTasks = Array.from(new Array(TASK_COUNT)).map(() => taskData());
-  const actualFiltersList = filtersData([...actualTasksList, ...additionalTasks]);
-  let boardTasksElement = mainElement.querySelector(`.board`);
-  let filterElement = mainElement.querySelector(`.filter`);
+  let boardTasks = mainElement.querySelector(`.board__tasks`);
+  let loadMoreButton = mainElement.querySelector(`.load-more`);
 
-  const updateElements = () => {
-    return `${filtersTemplate(actualFiltersList)}
-          ${boardTemplate([...actualTasksList, ...additionalTasks], true)}`;
+  const addTasks = () => {
+    return `${boardTasksList([...actualTasksList], true)}`;
   };
 
-  boardTasksElement.remove();
-  filterElement.remove();
-  render(mainElement, updateElements(), `beforeend`);
+  loadMoreButton.remove();
+  render(boardTasks, addTasks(), `beforeend`);
 };
 
 let loadMoreButton = mainElement.querySelector(`.load-more`);

@@ -25,7 +25,7 @@ const taskData = () => ({
     `Сделать домашку`,
     `Пройти интенсив на соточку`][getRandomIntWithMax(2)],
   dueDate: getRandomSeveralDaysFromDate(Date.now(), 7),
-  tags: getRandomArrayValues(Array.from(new Set([`homework`, `theory`, `practice`, `intensive`, `keks`])), 3),
+  tags: new Set(getRandomArrayValues([`homework`, `theory`, `practice`, `intensive`, `keks`], 3)),
   repeatingDays: getRepeatingDays(),
   colors: getColors(),
   currentColor: getColors()[getRandomIntWithMax(4)],
